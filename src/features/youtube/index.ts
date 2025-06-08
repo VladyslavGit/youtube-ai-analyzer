@@ -1,1 +1,1 @@
-// TODO: YouTube video parsing and metadata
+export * from './YouTubeInput';
