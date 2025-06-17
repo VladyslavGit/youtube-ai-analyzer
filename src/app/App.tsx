@@ -1,10 +1,15 @@
-import React from 'react';
+import { useState } from 'react';
+import { YouTubeInput } from '../features/youtube/YouTubeInput';
+import { SubtitleFetcher } from '../features/subtitles/SubtitleFetcher';
 
 export const App = () => {
+  const [videoId, setVideoId] = useState<string | null>(null);
+
   return (
-    <div className="text-center mt-20">
-      <h1 className="text-2xl font-bold">YouTube AI Analyzer</h1>
-      <p className="text-gray-600">Let’s build something amazing.</p>
-    </div>
+    <main className="p-8 max-w-2xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">YouTube AI Analyzer</h1>
+      <YouTubeInput onSubmit={setVideoId} />
+      {videoId && <SubtitleFetcher videoId={videoId} />}
+    </main>
   );
 };

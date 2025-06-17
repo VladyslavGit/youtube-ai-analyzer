@@ -1,1 +1,1 @@
-// TODO: Subtitle fetching logic
+export * from './SubtitleFetcher';
