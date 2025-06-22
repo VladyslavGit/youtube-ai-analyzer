@@ -2,16 +2,12 @@ import React, { useEffect } from 'react';
 import { useSummarize } from './useSummarize';
 
 type Props = {
-  transcript: string;
+  summary: string | null;
+  error: string | null;
+  loading: boolean;
 };
 
-export const SummaryViewer: React.FC<Props> = ({ transcript }) => {
-  const { summary, loading, error, summarize } = useSummarize();
-
-  useEffect(() => {
-    if (transcript) summarize(transcript);
-  }, [transcript]);
-
+export const SummaryViewer: React.FC<Props> = ({ summary, error, loading }) => {
   if (loading) return <p className="text-sm text-gray-500">Summarizing...</p>;
   if (error) return <p className="text-red-500">Error: {error}</p>;
   if (!summary) return null;

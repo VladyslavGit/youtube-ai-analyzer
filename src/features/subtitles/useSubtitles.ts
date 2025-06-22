@@ -1,24 +1,41 @@
 import { useState } from 'react';
+import { getSubtitles } from 'youtube-caption-scraper';
 
-export const useSubtitles = () => {
-  const [loading, setLoading] = useState(false);
+export function useSubtitles() {
   const [transcript, setTranscript] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchSubtitles = async (videoId: string) => {
     setLoading(true);
     setError(null);
+    setTranscript(null);
+
     try {
-      // TODO: Replace with real API later
-      const mockTranscript = `This is a mock subtitle for video ${videoId}. Replace this with real data.`;
-      await new Promise((res) => setTimeout(res, 1000)); // simulate latency
-      setTranscript(mockTranscript);
-    } catch (e) {
+      const subtitles = await getSubtitles({ videoID: videoId, lang: 'en' });
+
+      if (!Array.isArray(subtitles) || subtitles.length === 0) {
+        setError('No subtitles found for this video.');
+        return;
+      }
+
+      const fullTranscript = subtitles
+        .map((caption) => caption.text.trim())
+        .join(' ');
+
+      setTranscript(fullTranscript);
+    } catch (err) {
+      console.error('[useSubtitles] fetch error:', err);
       setError('Failed to fetch subtitles.');
     } finally {
       setLoading(false);
     }
   };
 
-  return { loading, transcript, error, fetchSubtitles };
-};
+  return {
+    transcript,
+    loading,
+    error,
+    fetchSubtitles,
+  };
+}

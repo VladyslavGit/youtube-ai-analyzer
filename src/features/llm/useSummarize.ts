@@ -11,7 +11,7 @@ export const useSummarize = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const summarize = async (transcript: string, options?: Options) => {
+  const generateSummary = async (transcript: string, options?: Options) => {
     setLoading(true);
     setError(null);
     setSummary(null);
@@ -30,5 +30,5 @@ export const useSummarize = () => {
     }
   };
 
-  return { summary, loading, error, summarize };
+  return { summary, loading, error, generateSummary };
 };
