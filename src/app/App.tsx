@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { YouTubeInput } from '../features/youtube/YouTubeInput';
 import { SubtitleFetcher } from '../features/subtitles/SubtitleFetcher';
 import { SummaryViewer } from '../features/llm/SummaryViewer';
