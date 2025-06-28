@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { callLlm } from './llmClient';
-import { buildSummaryPrompt } from './generatePrompt';
+import { callLlm } from '../llm/llmClient';
+import { buildSummaryPrompt } from '../llm/generatePrompt';
 
 type Options = {
   model?: string;

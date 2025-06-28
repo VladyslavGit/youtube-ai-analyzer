@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { YouTubeInput } from '../features/youtube/YouTubeInput';
 import { SubtitleFetcher } from '../features/subtitles/SubtitleFetcher';
-import { SummaryViewer } from '../features/llm/SummaryViewer';
-import { useSummarize } from '../features/llm/useSummarize';
+import { Summary } from '../features/summary';
+import { useSummarize } from '../features/summary/useSummarize';
 
 export const App = () => {
   const [videoId, setVideoId] = useState<string | null>(null);
@@ -31,11 +31,7 @@ export const App = () => {
       )}
 
       {transcript && (
-        <SummaryViewer
-          summary={summary}
-          loading={summarizing}
-          error={summaryError}
-        />
+        <Summary summary={summary} loading={summarizing} error={summaryError} />
       )}
     </main>
   );
