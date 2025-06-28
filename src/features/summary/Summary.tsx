@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
-import { useSummarize } from './useSummarize';
-
 type Props = {
   summary: string | null;
-  error: string | null;
   loading: boolean;
+  error: string | null;
 };
 
-export const SummaryViewer: React.FC<Props> = ({ summary, error, loading }) => {
+export const Summary: React.FC<Props> = ({ summary, loading, error }) => {
   if (loading) return <p className="text-sm text-gray-500">Summarizing...</p>;
   if (error) return <p className="text-red-500">Error: {error}</p>;
   if (!summary) return null;
